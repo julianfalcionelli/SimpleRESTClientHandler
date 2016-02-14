@@ -10,7 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 
-import net.lateralview.simplerestclienthandler.log.LogHelper;
+import net.lateralview.simplerestclienthandler.RestClientManager;
 import net.lateralview.simplerestclienthandler.log.RequestLoggingHelper;
 
 import org.json.JSONException;
@@ -37,7 +37,7 @@ public abstract class BaseJsonRequest extends JsonObjectRequest
 	protected BaseJsonRequest(int method, String url, JSONObject parameters, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener)
 	{
 		super(method, url, parameters, listener, errorListener);
-		if (LogHelper.LOG_DEBUG_INFO)
+		if (RestClientManager.sDebugLog)
 		{
 			Log.i(TAG, RequestLoggingHelper.getRequestText(this));
 		}
@@ -109,7 +109,7 @@ public abstract class BaseJsonRequest extends JsonObjectRequest
 	@Override
 	public void deliverError(VolleyError error)
 	{
-		if (LogHelper.LOG_DEBUG_INFO)
+		if (RestClientManager.sDebugLog)
 		{
 			Log.i(TAG, RequestLoggingHelper.getRequestErrorText(this, error));
 		}
@@ -119,7 +119,7 @@ public abstract class BaseJsonRequest extends JsonObjectRequest
 	@Override
 	protected void deliverResponse(JSONObject response)
 	{
-		if (LogHelper.LOG_DEBUG_INFO)
+		if (RestClientManager.sDebugLog)
 		{
 			Log.i(TAG, RequestLoggingHelper.getRequestResponseText(this, response));
 		}

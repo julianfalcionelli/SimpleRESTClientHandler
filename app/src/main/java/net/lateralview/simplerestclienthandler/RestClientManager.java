@@ -22,6 +22,8 @@ public class RestClientManager
 
 	private static RestClientManager sInstance;
 
+	public static boolean sDebugLog = false;
+
 	public static RestClientManager getInstance()
 	{
 		if (sInstance == null)
@@ -31,9 +33,16 @@ public class RestClientManager
 		return sInstance;
 	}
 
-	public static void initialize(Context context)
+	public static RestClientManager initialize(Context context)
 	{
 		sInstance = new RestClientManager(context);
+
+		return sInstance;
+	}
+
+	public void enableDebugLog(boolean enable)
+	{
+		sDebugLog = enable;
 	}
 
 	public <T> void addToRequestQueue(Request<T> req, String tag)
@@ -43,8 +52,7 @@ public class RestClientManager
 				50000,
 				DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
 				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-
+		
 		req.setTag(tag);
 		mRequestQueue.add(req);
 	}

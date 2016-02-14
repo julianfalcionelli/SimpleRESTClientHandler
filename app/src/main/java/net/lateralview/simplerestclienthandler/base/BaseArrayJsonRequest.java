@@ -10,7 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonArrayRequest;
 
-import net.lateralview.simplerestclienthandler.log.LogHelper;
+import net.lateralview.simplerestclienthandler.RestClientManager;
 import net.lateralview.simplerestclienthandler.log.RequestLoggingHelper;
 
 import org.json.JSONArray;
@@ -39,7 +39,7 @@ public abstract class BaseArrayJsonRequest extends JsonArrayRequest
 								   Response.ErrorListener errorListener)
 	{
 		super(method, url, parameters, listener, errorListener);
-		if (LogHelper.LOG_DEBUG_INFO)
+		if (RestClientManager.sDebugLog)
 		{
 			Log.i(TAG, RequestLoggingHelper.getRequestText(this));
 		}
@@ -100,7 +100,7 @@ public abstract class BaseArrayJsonRequest extends JsonArrayRequest
 	@Override
 	public void deliverError(VolleyError error)
 	{
-		if (LogHelper.LOG_DEBUG_INFO)
+		if (RestClientManager.sDebugLog)
 		{
 			Log.i(TAG, RequestLoggingHelper.getRequestErrorText(this, error));
 		}
@@ -111,7 +111,7 @@ public abstract class BaseArrayJsonRequest extends JsonArrayRequest
 	@Override
 	protected void deliverResponse(JSONArray response)
 	{
-		if (LogHelper.LOG_DEBUG_INFO)
+		if (RestClientManager.sDebugLog)
 		{
 			Log.i(TAG, RequestLoggingHelper.getRequestResponseText(this, response));
 		}
