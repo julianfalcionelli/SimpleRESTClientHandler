@@ -1,7 +1,6 @@
 package net.lateralview.simplerestclienthandler;
 
 import android.content.Context;
-import android.text.TextUtils;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -36,7 +35,7 @@ public class RestClientManager
 	{
 		sInstance = new RestClientManager(context);
 	}
-	
+
 	public <T> void addToRequestQueue(Request<T> req, String tag)
 	{
 		//to avoid time out
