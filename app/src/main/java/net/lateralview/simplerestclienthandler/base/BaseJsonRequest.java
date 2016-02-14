@@ -43,17 +43,6 @@ public abstract class BaseJsonRequest extends JsonObjectRequest
 		}
 	}
 
-	protected BaseJsonRequest(int method, String url, JSONObject parameters, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, Map<String, String> headers)
-	{
-		this(method, url, parameters, listener, errorListener);
-		mHeaders = headers;
-	}
-
-	protected BaseJsonRequest(int method, String url, RequestHandler requestHandler)
-	{
-		this(method, url, requestHandler.getParameters(), requestHandler.getResponseSuccessListener(), requestHandler.getResponseErrorListener());
-	}
-
 	protected BaseJsonRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers)
 	{
 		this(method, url, requestHandler.getParameters(), requestHandler.getResponseSuccessListener(), requestHandler.getResponseErrorListener());

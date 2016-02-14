@@ -45,11 +45,6 @@ public abstract class BaseArrayJsonRequest extends JsonArrayRequest
 		}
 	}
 
-	protected BaseArrayJsonRequest(int method, String url, RequestHandler requestHandler)
-	{
-		this(method, url, requestHandler.getParameters(), requestHandler.getArrayResponseSuccessListener(), requestHandler.getResponseErrorListener());
-	}
-
 	protected BaseArrayJsonRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers)
 	{
 		this(method, url, requestHandler.getParameters(), requestHandler.getArrayResponseSuccessListener(), requestHandler.getResponseErrorListener());
