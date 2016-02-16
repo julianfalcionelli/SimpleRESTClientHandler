@@ -22,7 +22,7 @@ public class RequestLoggingHelper
 	{
 		StringBuilder msg = new StringBuilder();
 
-		msg.append("New ").append(request.getMethod() == Request.Method.POST ? "POST" : "GET").append(" request").append("\n");
+		msg.append("New ").append(getMethodText(request.getMethod())).append(" request").append("\n");
 		msg.append("URL: ").append(request.getUrl()).append("\n");
 		try
 		{
@@ -46,7 +46,7 @@ public class RequestLoggingHelper
 	{
 		StringBuilder msg = new StringBuilder();
 
-		msg.append(request.getMethod() == Request.Method.POST ? "POST" : "GET").append(" request failed ").append("\n");
+		msg.append(getMethodText(request.getMethod())).append(" request failed ").append("\n");
 		msg.append("URL: ").append(request.getUrl()).append("\n");
 
 		String statusCode = "unknown";
@@ -72,29 +72,54 @@ public class RequestLoggingHelper
 	 */
 	public static String getRequestResponseText(Request request, JSONArray response)
 	{
+		return getRequestResponseText(request, response.toString());
+	}
+
+	public static String getRequestResponseText(Request request, JSONObject response)
+	{
+		return getRequestResponseText(request, response.toString());
+	}
+
+	public static String getRequestResponseText(Request request, String response)
+	{
 		StringBuilder msg = new StringBuilder();
 
-		msg.append(request.getMethod() == Request.Method.POST ? "POST" : "GET").append(" request successful ").append("\n");
+		msg.append(getMethodText(request.getMethod())).append(" request successful ").append("\n");
+
 		msg.append("URL: ").append(request.getUrl()).append("\n");
+
 		if (response != null)
 		{
-			msg.append("Response: ").append(response.toString()).append("\n");
+			msg.append("Response: ").append(response).append("\n");
 		}
 
 		return msg.toString();
 	}
 
-	public static String getRequestResponseText(Request request, JSONObject response)
+	public static String getMethodText(int method)
 	{
-		StringBuilder msg = new StringBuilder();
-
-		msg.append(request.getMethod() == Request.Method.POST ? "POST" : "GET").append(" request successful ").append("\n");
-		msg.append("URL: ").append(request.getUrl()).append("\n");
-		if (response != null)
+		switch (method)
 		{
-			msg.append("Response: ").append(response.toString()).append("\n");
+			case Request.Method.POST:
+			{
+				return "POST";
+			}
+			case Request.Method.GET:
+			{
+				return "GET";
+			}
+			case Request.Method.PUT:
+			{
+				return "PUT";
+			}
+			case Request.Method.DELETE:
+			{
+				return "DELETE";
+			}
+			default:
+			{
+				return "OTHER";
+			}
 		}
-
-		return msg.toString();
 	}
 }
