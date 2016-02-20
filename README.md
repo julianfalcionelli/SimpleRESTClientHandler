@@ -23,7 +23,7 @@ dependencies {
 Initialize the RestClientManager in your Application class in the #onCreate() method.
 
 ```java
-		RestClientManager.initialize(getInstance()).enableDebugLog(true);
+RestClientManager.initialize(getInstance()).enableDebugLog(true);
 ```
 
 The `enableDebugLog` method allows you too see the request information in the console.
