@@ -70,7 +70,7 @@ The `Request Callbacks` object has four methods:
 You can pass to the  `Request Handler` object the parameters. The parameters can be a bundle or any object that use GSON, and automatically the library will parse the object to a valid json.
 
 ### JSON Array Request
-To make a request that returns a JSON Array you need to call the `makeJsonRequest`.
+To make a request that returns a JSON Array you need to call the `makeJsonArrayRequest`.
 
 ```java
 RestClientManager.getInstance().makeJsonArrayRequest(Request.Method.GET, url, new RequestHandler<>(new RequestCallbacks<List<ResponseItemModel>, ErrorModel>()
