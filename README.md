@@ -72,7 +72,7 @@ You can pass to the  `Request Handler` object the parameters. The parameters can
 ### JSON Array Request
 
 ```java
-RestClientManager.getInstance().makeJsonArrayRequest(Request.Method.POST, url, new RequestHandler<>(new RequestCallbacks<List<ResponseItemModel>, ErrorModel>()
+RestClientManager.getInstance().makeJsonArrayRequest(Request.Method.GET, url, new RequestHandler<>(new RequestCallbacks<List<ResponseItemModel>, ErrorModel>()
 		{
 			@Override
 			public void onRequestSuccess(List<ResponseItemModel> response)
