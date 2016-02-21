@@ -56,7 +56,7 @@ RestClientManager.getInstance().makeJsonRequest(Request.Method.POST, url, new Re
 		}, parameters));
 ```
 
-To create an instance of an `Request Handler` you need to spend a instance of `Request Callbacks`. This class has two types, the model answer at the first set and the second type defines the model error. If you do not want to analyze the response or error just pass a 'Object` in each of the types.
+To create an instance of `Request Handler` you need to spend a instance of `Request Callbacks`. This class has two types, the model answer at the first set and the second type defines the model error. If you do not want to analyze the response or error just pass a 'Object` in each of the types.
 
 Remember that the classes passed to the `Request Callbacks` object must be use GSON, where each of the values assigned to GSON must correspond to the parameters sent by the server.
 
