@@ -90,7 +90,13 @@ RestClientManager.getInstance().makeJsonArrayRequest(Request.Method.GET, url, ne
 		}, parameters));
 ```
 
-##License
+WIP
+-----
+- Support Multipart Requests. 
+-  Allow automatic cancellation of repeated requests.
+
+License
+-----
     Copyright 2016 Julián Falcionelli
 
     Licensed under the Apache License, Version 2.0 (the "License");
