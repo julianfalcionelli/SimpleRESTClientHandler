@@ -1,5 +1,6 @@
-SimpleRESTClientHandler
+SimpleRESTClientHandler 
 ===========
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-SimpleRESTClientHandler-green.svg?style=true)](https://android-arsenal.com/details/1/3209)
 
 SimpleRESTClientHandler is an Open Source Android library that allows developers to easily make request to a REST server usign VOLLEY and GSON. 
 Using GSON as dependency SimpleRESTClientHandler parse the responses automatically to the Model of your interest.
@@ -90,7 +91,13 @@ RestClientManager.getInstance().makeJsonArrayRequest(Request.Method.GET, url, ne
 		}, parameters));
 ```
 
-##License
+WIP
+-----
+- Support Multipart Requests. 
+-  Allow automatic cancellation of repeated requests.
+
+License
+-----
     Copyright 2016 Julián Falcionelli
 
     Licensed under the Apache License, Version 2.0 (the "License");
