@@ -9,6 +9,8 @@ import com.android.volley.toolbox.Volley;
 
 import net.lateralview.simplerestclienthandler.base.BaseArrayJsonRequest;
 import net.lateralview.simplerestclienthandler.base.BaseJsonRequest;
+import net.lateralview.simplerestclienthandler.base.BaseMultipartJsonArrayRequest;
+import net.lateralview.simplerestclienthandler.base.BaseMultipartJsonRequest;
 import net.lateralview.simplerestclienthandler.base.RequestHandler;
 
 import java.util.Map;
@@ -119,6 +121,56 @@ public class RestClientManager
 	public void makeJsonArrayRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers, String tag)
 	{
 		addToRequestQueue(new BaseArrayJsonRequest(method, url, requestHandler, headers)
+		{
+		}, tag);
+	}
+
+	/*
+		For multipart request what returns JSONObject
+	 */
+	public void makeMultipartJsonRequest(int method, String url, RequestHandler requestHandler)
+	{
+		makeMultipartJsonRequest(method, url, requestHandler, null, null);
+	}
+
+	public void makeMultipartJsonRequest(int method, String url, RequestHandler requestHandler, String tag)
+	{
+		makeMultipartJsonRequest(method, url, requestHandler, null, tag);
+	}
+
+	public void makeMultipartJsonRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers)
+	{
+		makeMultipartJsonRequest(method, url, requestHandler, headers, null);
+	}
+
+	public void makeMultipartJsonRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers, String tag)
+	{
+		addToRequestQueue(new BaseMultipartJsonRequest(method, url, requestHandler, headers)
+		{
+		}, tag);
+	}
+
+	/*
+		For multipart request what returns JSONArray
+	 */
+	public void makeMultipartJsonArrayRequest(int method, String url, RequestHandler requestHandler)
+	{
+		makeMultipartJsonArrayRequest(method, url, requestHandler, null, null);
+	}
+
+	public void makeMultipartJsonArrayRequest(int method, String url, RequestHandler requestHandler, String tag)
+	{
+		makeMultipartJsonArrayRequest(method, url, requestHandler, null, tag);
+	}
+
+	public void makeMultipartJsonArrayRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers)
+	{
+		makeMultipartJsonArrayRequest(method, url, requestHandler, headers, null);
+	}
+
+	public void makeMultipartJsonArrayRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers, String tag)
+	{
+		addToRequestQueue(new BaseMultipartJsonArrayRequest(method, url, requestHandler, headers)
 		{
 		}, tag);
 	}

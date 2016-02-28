@@ -35,8 +35,7 @@ public abstract class BaseArrayJsonRequest extends JsonArrayRequest
 	 * @param listener      Listener to handle request successful response
 	 * @param errorListener Listener to handle request error response
 	 */
-	protected BaseArrayJsonRequest(int method, String url, JSONObject parameters, Response.Listener<JSONArray> listener,
-								   Response.ErrorListener errorListener)
+	protected BaseArrayJsonRequest(int method, String url, JSONObject parameters, Response.Listener<JSONArray> listener, Response.ErrorListener errorListener)
 	{
 		super(method, url, parameters, listener, errorListener);
 		if (RestClientManager.sDebugLog)
@@ -54,18 +53,7 @@ public abstract class BaseArrayJsonRequest extends JsonArrayRequest
 	@Override
 	public Map<String, String> getHeaders() throws AuthFailureError
 	{
-		Map<String, String> headers = new HashMap<String, String>();
-
-		headers.put("Content-Type", "application/json");
-		if (mHeaders != null)
-		{
-			for (Map.Entry<String, String> entry : mHeaders.entrySet())
-			{
-				headers.put(entry.getKey(), entry.getValue());
-			}
-		}
-
-		return headers;
+		return mHeaders;
 	}
 
 	@Override
