@@ -247,8 +247,9 @@ public class RequestHandler<T>
 		return mFileParameters;
 	}
 
-	public void setFileParameters(Map<String, String> fileParameters)
+	public RequestHandler setFileParameters(Map<String, String> fileParameters)
 	{
 		mFileParameters = fileParameters;
+		return this;
 	}
 }
