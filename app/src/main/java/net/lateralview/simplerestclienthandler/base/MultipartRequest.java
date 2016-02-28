@@ -54,18 +54,7 @@ public abstract class MultipartRequest<T> extends Request<T>
 	@Override
 	public Map<String, String> getHeaders() throws AuthFailureError
 	{
-		Map<String, String> requestHeaders = new HashMap<>();
-		requestHeaders.put("Content-Type", getBodyContentType());
-
-		if (mHeaders != null)
-		{
-			for (Map.Entry<String, String> entry : mHeaders.entrySet())
-			{
-				requestHeaders.put(entry.getKey(), entry.getValue());
-			}
-		}
-
-		return requestHeaders;
+		return mHeaders;
 	}
 
 	@Override
