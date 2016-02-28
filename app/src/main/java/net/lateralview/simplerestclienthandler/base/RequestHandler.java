@@ -7,13 +7,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 
-import net.lateralview.simplerestclienthandler.utils.BundleJSONConverter;
+import net.lateralview.simplerestclienthandler.helper.BundleJSONConverter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Map;
 
 public class RequestHandler<T>
 {
@@ -23,6 +24,7 @@ public class RequestHandler<T>
 	private Type mToClassType, mErrorClassType;
 	private T mObjectParameter;
 	private Bundle mBundleParameters;
+	private Map<String, String> mFileParameters;
 
 	public RequestHandler(RequestCallbacks requestCallbacks, T parameter)
 	{
@@ -240,4 +242,13 @@ public class RequestHandler<T>
 		}
 	}
 
+	public Map<String, String> getFileParameters()
+	{
+		return mFileParameters;
+	}
+
+	public void setFileParameters(Map<String, String> fileParameters)
+	{
+		mFileParameters = fileParameters;
+	}
 }

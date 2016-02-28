@@ -35,8 +35,7 @@ public abstract class BaseArrayJsonRequest extends JsonArrayRequest
 	 * @param listener      Listener to handle request successful response
 	 * @param errorListener Listener to handle request error response
 	 */
-	protected BaseArrayJsonRequest(int method, String url, JSONObject parameters, Response.Listener<JSONArray> listener,
-								   Response.ErrorListener errorListener)
+	protected BaseArrayJsonRequest(int method, String url, JSONObject parameters, Response.Listener<JSONArray> listener, Response.ErrorListener errorListener)
 	{
 		super(method, url, parameters, listener, errorListener);
 		if (RestClientManager.sDebugLog)
