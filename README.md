@@ -91,10 +91,9 @@ RestClientManager.getInstance().makeJsonArrayRequest(Request.Method.GET, url, ne
 		}, parameters));
 ```
 
-WIP
+NEWS
 -----
-- Support Multipart Requests. 
--  Allow automatic cancellation of repeated requests.
+- Now Support Multipart Requests! 
 
 License
 -----
