@@ -48,8 +48,6 @@ public class MultipartEntity
 						buildPart(dos, new FileService(file).toByteArray(), entry.getKey());
 					}
 				}
-
-				dos.writeBytes(TWO_HYPHENS + boundary + TWO_HYPHENS + LINE_END);
 			}
 
 			if (null != params)
@@ -61,9 +59,10 @@ public class MultipartEntity
 						buildTextPart(dos, entry.getKey(), entry.getValue());
 					}
 				}
-
-				dos.writeBytes(TWO_HYPHENS + boundary + TWO_HYPHENS);
 			}
+
+			dos.writeBytes(TWO_HYPHENS + boundary + TWO_HYPHENS);
+
 		} catch (IOException e)
 		{
 			VolleyLog.e("buildMultipartEntity: " + e.toString());
