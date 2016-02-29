@@ -6,7 +6,9 @@ import android.util.Log;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import net.lateralview.simplerestclienthandler.gson.AnnotationExclusionStrategy;
 import net.lateralview.simplerestclienthandler.helper.BundleJSONConverter;
 
 import org.json.JSONArray;
@@ -97,7 +99,7 @@ public class RequestHandler<T>
 		{
 			if (mObjectParameter != null)
 			{
-				jsonObject = new JSONObject(new Gson().toJson(mObjectParameter));
+				jsonObject = new JSONObject(new GsonBuilder().setExclusionStrategies(new AnnotationExclusionStrategy()).create().toJson(mObjectParameter));
 			} else
 			{
 				if (mBundleParameters != null)
