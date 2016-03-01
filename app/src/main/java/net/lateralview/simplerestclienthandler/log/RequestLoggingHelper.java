@@ -35,6 +35,17 @@ public class RequestLoggingHelper
 		return msg.toString();
 	}
 
+	public static String getMultipartRequestText(Request request, JSONObject stringParameters)
+	{
+		StringBuilder msg = new StringBuilder();
+
+		msg.append("New ").append(getMethodText(request.getMethod())).append(" request").append("\n");
+		msg.append("URL: ").append(request.getUrl()).append("\n");
+		msg.append("JSON: ").append(stringParameters.toString()).append("\n");
+
+		return msg.toString();
+	}
+
 	/**
 	 * Gets Request error information.
 	 *

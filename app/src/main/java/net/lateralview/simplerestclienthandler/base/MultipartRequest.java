@@ -14,7 +14,6 @@ import net.lateralview.simplerestclienthandler.log.RequestLoggingHelper;
 
 import org.json.JSONObject;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public abstract class MultipartRequest<T> extends Request<T>
@@ -41,7 +40,7 @@ public abstract class MultipartRequest<T> extends Request<T>
 
 		if (RestClientManager.sDebugLog)
 		{
-			Log.i(TAG, RequestLoggingHelper.getRequestText(this));
+			Log.i(TAG, RequestLoggingHelper.getMultipartRequestText(this, parameters));
 		}
 	}
 
