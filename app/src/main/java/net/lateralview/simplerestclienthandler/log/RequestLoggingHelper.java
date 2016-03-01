@@ -41,7 +41,11 @@ public class RequestLoggingHelper
 
 		msg.append("New ").append(getMethodText(request.getMethod())).append(" request").append("\n");
 		msg.append("URL: ").append(request.getUrl()).append("\n");
-		msg.append("JSON: ").append(stringParameters.toString()).append("\n");
+		
+		if (stringParameters != null)
+		{
+			msg.append("JSON: ").append(stringParameters.toString()).append("\n");
+		}
 
 		return msg.toString();
 	}
