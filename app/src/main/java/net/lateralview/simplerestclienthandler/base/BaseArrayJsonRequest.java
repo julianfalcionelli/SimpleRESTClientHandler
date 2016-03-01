@@ -53,7 +53,17 @@ public abstract class BaseArrayJsonRequest extends JsonArrayRequest
 	@Override
 	public Map<String, String> getHeaders() throws AuthFailureError
 	{
-		return mHeaders;
+		Map<String, String> headers = new HashMap<>();
+
+		if (mHeaders != null)
+		{
+			for (Map.Entry<String, String> entry : mHeaders.entrySet())
+			{
+				headers.put(entry.getKey(), entry.getValue());
+			}
+		}
+
+		return headers;
 	}
 
 	@Override

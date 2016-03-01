@@ -14,6 +14,7 @@ import net.lateralview.simplerestclienthandler.log.RequestLoggingHelper;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public abstract class MultipartRequest<T> extends Request<T>
@@ -53,7 +54,17 @@ public abstract class MultipartRequest<T> extends Request<T>
 	@Override
 	public Map<String, String> getHeaders() throws AuthFailureError
 	{
-		return mHeaders;
+		Map<String, String> headers = new HashMap<>();
+
+		if (mHeaders != null)
+		{
+			for (Map.Entry<String, String> entry : mHeaders.entrySet())
+			{
+				headers.put(entry.getKey(), entry.getValue());
+			}
+		}
+
+		return headers;
 	}
 
 	@Override
