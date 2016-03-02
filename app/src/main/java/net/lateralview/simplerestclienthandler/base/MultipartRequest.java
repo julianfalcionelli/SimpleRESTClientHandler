@@ -24,7 +24,7 @@ public abstract class MultipartRequest<T> extends Request<T>
 
 	private final Response.Listener<T> mListener;
 
-	protected Map<String, String> mHeaders;
+	protected Map<String, String> mHeaders = new HashMap<>();
 	protected String mMimeType;
 	protected MultipartEntity mMultipartEntity;
 
@@ -33,7 +33,11 @@ public abstract class MultipartRequest<T> extends Request<T>
 		super(method, url, errorListener);
 
 		mListener = listener;
-		mHeaders = headers;
+
+		if (headers != null)
+		{
+			mHeaders.putAll(headers);
+		}
 
 		mMultipartEntity = new MultipartEntity(fileParameters, ParametersJSONObject.toMap(parameters));
 
@@ -54,17 +58,7 @@ public abstract class MultipartRequest<T> extends Request<T>
 	@Override
 	public Map<String, String> getHeaders() throws AuthFailureError
 	{
-		Map<String, String> headers = new HashMap<>();
-
-		if (mHeaders != null)
-		{
-			for (Map.Entry<String, String> entry : mHeaders.entrySet())
-			{
-				headers.put(entry.getKey(), entry.getValue());
-			}
-		}
-
-		return headers;
+		return mHeaders;
 	}
 
 	@Override

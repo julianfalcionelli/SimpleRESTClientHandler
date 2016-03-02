@@ -26,7 +26,7 @@ public abstract class BaseArrayJsonRequest extends JsonArrayRequest
 {
 	protected static String TAG = BaseArrayJsonRequest.class.getSimpleName();
 
-	protected Map<String, String> mHeaders;
+	protected Map<String, String> mHeaders = new HashMap<>();
 
 	/**
 	 * @param method        HTTP method type (POST, PUT, DELETE or GET)
@@ -47,23 +47,17 @@ public abstract class BaseArrayJsonRequest extends JsonArrayRequest
 	protected BaseArrayJsonRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers)
 	{
 		this(method, url, requestHandler.getParameters(), requestHandler.getArrayResponseSuccessListener(), requestHandler.getResponseErrorListener());
-		mHeaders = headers;
+
+		if (headers != null)
+		{
+			mHeaders.putAll(headers);
+		}
 	}
 
 	@Override
 	public Map<String, String> getHeaders() throws AuthFailureError
 	{
-		Map<String, String> headers = new HashMap<>();
-
-		if (mHeaders != null)
-		{
-			for (Map.Entry<String, String> entry : mHeaders.entrySet())
-			{
-				headers.put(entry.getKey(), entry.getValue());
-			}
-		}
-
-		return headers;
+		return mHeaders;
 	}
 
 	@Override

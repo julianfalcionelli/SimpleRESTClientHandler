@@ -17,7 +17,6 @@ public class MultipartEntity
 	private final String boundary = "apiclient-" + System.currentTimeMillis();
 	private Map<String, String> fileParams;
 	private Map<String, String> params;
-	private int fileCount = 0;
 
 	public MultipartEntity(Map<String, String> fileParams, Map<String, String> params)
 	{
@@ -73,13 +72,6 @@ public class MultipartEntity
 
 	private void buildPart(DataOutputStream dataOutputStream, byte[] fileData, String fieldName, String fileName) throws IOException
 	{
-		fileCount++;
-
-		if (fileCount >= 2)
-		{
-			fieldName += Integer.toString(fileCount);
-		}
-
 		dataOutputStream.writeBytes(TWO_HYPHENS + boundary + LINE_END);
 		dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"" + fieldName + "\"; filename=\"" + fileName + "\"" + LINE_END);
 		dataOutputStream.writeBytes(LINE_END);
