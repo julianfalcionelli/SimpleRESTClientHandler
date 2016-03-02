@@ -45,7 +45,7 @@ public class MultipartEntity
 
 					if (file.exists())
 					{
-						buildPart(dos, new FileService(file).toByteArray(), entry.getKey());
+						buildPart(dos, new FileService(file).toByteArray(), entry.getKey(), file.getName());
 					}
 				}
 			}
@@ -71,10 +71,8 @@ public class MultipartEntity
 		return bos.toByteArray();
 	}
 
-	private void buildPart(DataOutputStream dataOutputStream, byte[] fileData, String fileName) throws IOException
+	private void buildPart(DataOutputStream dataOutputStream, byte[] fileData, String fieldName, String fileName) throws IOException
 	{
-		String fieldName = "file";
-
 		fileCount++;
 
 		if (fileCount >= 2)
