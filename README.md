@@ -24,10 +24,16 @@ dependencies {
 Initialize the RestClientManager in your Application class in the #onCreate() method.
 
 ```java
-RestClientManager.initialize(getInstance()).enableDebugLog(true);
+RestClientManager.initialize(getApplicationContext()).enableDebugLog(true);
 ```
 
 The `enableDebugLog` method allows you too see the request information in the console.
+
+Remember to have the Internet Permission in the manifest
+
+```xml
+    <uses-permission android:name="android.permission.INTERNET" />
+```
 
 Simple Example
 -----
@@ -91,9 +97,55 @@ RestClientManager.getInstance().makeJsonArrayRequest(Request.Method.GET, url, ne
 		}, parameters));
 ```
 
+### Multipart Request
+To make a mutipart request call the `makeMultipartJsonRequest` method if the response is a JSONObject or call the `makeMultipartJsonArrayRequest` method if the response is a JSON Array.
+
+To pass files to the RequestHandler call the `setFileParameters` method passing a `Map<String, String>` where the key represent the file identifier and the value the file path in the device.
+
+ - makeMultipartJsonRequest
+
+```java
+RestClientManager.getInstance().makeMultipartJsonRequest(Request.Method.POST, url, new RequestHandler<>(new RequestCallbacks<ResponseModel, ErrorModel>()
+		{
+			@Override
+			public void onRequestSuccess(ResponseModel response)
+			{
+
+			}
+
+			@Override
+			public void onRequestError(ErrorModel error)
+			{
+
+			}
+
+		}, parameters).setFileParameters(filesMap));
+```
+
+ - makeMultipartJsonArrayRequest
+ 
+```java
+RestClientManager.getInstance().makeMultipartJsonArrayRequest(Request.Method.GET, url, new RequestHandler<>(new RequestCallbacks<List<ResponseItemModel>, ErrorModel>()
+		{
+			@Override
+			public void onRequestSuccess(List<ResponseItemModel> response)
+			{
+
+			}
+
+			@Override
+			public void onRequestError(ErrorModel error)
+			{
+
+			}
+
+		}, parameters).setFileParameters(filesMap));
+```
+
 NEWS
 -----
 - Now Support Multipart Requests! 
+- Gson extension to exclude parameters in the serialization process (`@Exclude`)
 
 License
 -----
