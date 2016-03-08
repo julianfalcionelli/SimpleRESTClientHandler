@@ -74,6 +74,19 @@ The `Request Callbacks` object has four methods:
 -  `onRequestError`: It is obligatory to overwrite. This method will be execute if the request failed (HTTP Status != 200)
 -  `onRequestFinish`: This method is always executed after the request is made, independently if the request failed or not.
 
+![Alt text](http://g.gravizo.com/g?
+  digraph G {
+    aize ="4,4";
+    onRequestStart [shape=box];
+    onRequestFinish [shape=box];
+    onRequestSuccess [shape=box];
+    onRequestError [shape=box];
+    onRequestStart -> onRequestFinish;
+    onRequestFinish -> onRequestSuccess;
+    onRequestFinish -> onRequestError;
+  }
+)
+
 You can pass to the  `Request Handler` object the parameters. The parameters can be a bundle or any object that use GSON, and automatically the library will parse the object to a valid json.
 
 ### JSON Array Request
@@ -142,7 +155,7 @@ RestClientManager.getInstance().makeMultipartJsonArrayRequest(Request.Method.GET
 		}, parameters).setFileParameters(filesMap));
 ```
 
-NEWS
+News
 -----
 - Now Support Multipart Requests! 
 - Gson extension to exclude parameters in the serialization process (`@Exclude`)
