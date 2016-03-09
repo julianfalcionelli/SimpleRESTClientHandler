@@ -65,6 +65,13 @@ public class RestClientManager
 		return sInstance;
 	}
 
+	public static RestClientManager initialize(Context context,ResponseDelivery responseDelivery)
+	{
+		sInstance = new RestClientManager(context,responseDelivery);
+
+		return sInstance;
+	}
+
 	public void enableDebugLog(boolean enable)
 	{
 		sDebugLog = enable;
