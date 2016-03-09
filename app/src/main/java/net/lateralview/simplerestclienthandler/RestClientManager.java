@@ -5,6 +5,8 @@ import android.content.Context;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.ResponseDelivery;
 import com.android.volley.toolbox.Volley;
 
 import net.lateralview.simplerestclienthandler.base.BaseArrayJsonRequest;
@@ -12,6 +14,7 @@ import net.lateralview.simplerestclienthandler.base.BaseJsonRequest;
 import net.lateralview.simplerestclienthandler.base.BaseMultipartJsonArrayRequest;
 import net.lateralview.simplerestclienthandler.base.BaseMultipartJsonRequest;
 import net.lateralview.simplerestclienthandler.base.RequestHandler;
+import net.lateralview.simplerestclienthandler.helper.VolleyHelper;
 
 import java.util.Map;
 
@@ -22,7 +25,21 @@ public class RestClientManager
 	private RestClientManager(Context context)
 	{
 		mContext = context;
-		mRequestQueue = Volley.newRequestQueue(context);
+		mRequestQueue = VolleyHelper.newRequestQueue(context);
+	}
+
+	/**
+     * Method used to create a queue that uses a custom response delivery.
+     * @param context the context the manager will use to create de queue (Use application context in the application initialization)
+	 * @param responseDelivery this can be used to execute calls in a worker or a main thread. Be careful with it's usage since it can generate a blocking thread and this can lead to a poor performance of your app.
+	 *                         Consider using a SingleThreadExecutor to perform Async tests in your unit testing clases.
+     *
+     *                         Example: new ExecutorDelivery(Executors.newSingleThreadExecutor())
+	 */
+	private RestClientManager(Context context, ResponseDelivery responseDelivery)
+	{
+		mContext = context;
+		mRequestQueue = VolleyHelper.newRequestQueue(mContext,null,-1,responseDelivery);
 	}
 
 	private final RequestQueue mRequestQueue;
