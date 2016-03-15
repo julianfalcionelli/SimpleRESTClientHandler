@@ -5,6 +5,7 @@ import android.content.Context;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.ResponseDelivery;
 import com.android.volley.toolbox.Volley;
 
 import net.lateralview.simplerestclienthandler.base.BaseArrayJsonRequest;
@@ -12,6 +13,7 @@ import net.lateralview.simplerestclienthandler.base.BaseJsonRequest;
 import net.lateralview.simplerestclienthandler.base.BaseMultipartJsonArrayRequest;
 import net.lateralview.simplerestclienthandler.base.BaseMultipartJsonRequest;
 import net.lateralview.simplerestclienthandler.base.RequestHandler;
+import net.lateralview.simplerestclienthandler.helper.VolleyHelper;
 
 import java.util.Map;
 
@@ -19,18 +21,33 @@ public class RestClientManager
 {
 	public static final String TAG = RestClientManager.class.getSimpleName();
 
-	private RestClientManager(Context context)
-	{
-		mContext = context;
-		mRequestQueue = Volley.newRequestQueue(context);
-	}
-
 	private final RequestQueue mRequestQueue;
 	private final Context mContext;
 
 	private static RestClientManager sInstance;
 
 	public static boolean sDebugLog = false;
+
+	private RestClientManager(Context context)
+	{
+		mContext = context;
+		mRequestQueue = Volley.newRequestQueue(context);
+	}
+
+	/**
+	 * Method used to create a queue that uses a custom response delivery.
+	 *
+	 * @param context          the context the manager will use to create de queue (Use application context in the application initialization)
+	 * @param responseDelivery this can be used to execute calls in a worker or a main thread. Be careful with it's usage since it can generate a blocking thread and this can lead to a poor performance of your app.
+	 *                         Consider using a SingleThreadExecutor to perform Async tests in your unit testing clases.
+	 *                         <p/>
+	 *                         Example: new ExecutorDelivery(Executors.newSingleThreadExecutor())
+	 */
+	private RestClientManager(Context context, ResponseDelivery responseDelivery)
+	{
+		mContext = context;
+		mRequestQueue = VolleyHelper.newRequestQueue(mContext, responseDelivery);
+	}
 
 	public static RestClientManager getInstance()
 	{
@@ -44,6 +61,13 @@ public class RestClientManager
 	public static RestClientManager initialize(Context context)
 	{
 		sInstance = new RestClientManager(context);
+
+		return sInstance;
+	}
+
+	public static RestClientManager initialize(Context context, ResponseDelivery responseDelivery)
+	{
+		sInstance = new RestClientManager(context, responseDelivery);
 
 		return sInstance;
 	}
