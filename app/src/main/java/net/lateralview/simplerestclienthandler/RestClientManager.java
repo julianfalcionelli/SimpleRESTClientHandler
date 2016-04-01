@@ -129,17 +129,17 @@ public class RestClientManager
 	 */
 	public void makeJsonArrayRequest(int method, String url, RequestHandler requestHandler)
 	{
-		makeJsonRequest(method, url, requestHandler, null, null);
+		makeJsonArrayRequest(method, url, requestHandler, null, null);
 	}
 
 	public void makeJsonArrayRequest(int method, String url, RequestHandler requestHandler, String tag)
 	{
-		makeJsonRequest(method, url, requestHandler, null, tag);
+		makeJsonArrayRequest(method, url, requestHandler, null, tag);
 	}
 
 	public void makeJsonArrayRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers)
 	{
-		makeJsonRequest(method, url, requestHandler, headers, null);
+		makeJsonArrayRequest(method, url, requestHandler, headers, null);
 	}
 
 	public void makeJsonArrayRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers, String tag)
