@@ -103,6 +103,7 @@ public class MultipartEntity
 		dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"" + parameterName + "\"" + LINE_END);
 		dataOutputStream.writeBytes("Content-Type: text/plain; charset=UTF-8" + LINE_END);
 		dataOutputStream.writeBytes(LINE_END);
-		dataOutputStream.writeBytes(parameterValue + LINE_END);
+		dataOutputStream.write(parameterValue.getBytes("UTF-8"));
+		dataOutputStream.writeBytes(LINE_END);
 	}
 }
