@@ -183,13 +183,21 @@ public class RequestHandler<T>
 		{
 			try
 			{
-				callRequestCallbackOnSuccess(mToClassType != null ? new Gson().fromJson(response.toString(), mToClassType) : null);
+				if (mToClassType != null && mToClassType.getClass().getCanonicalName().equals(JSONObject.class.getCanonicalName()))
+				{
+					callRequestCallbackOnSuccess(response);
+				}
+				else
+				{
+					callRequestCallbackOnSuccess(mToClassType != null ? new Gson().fromJson(response.toString(), mToClassType) : null);
+				}
 			} catch (Exception e)
 			{
 				if (e != null && e.getMessage() != null)
 				{
 					Log.e(TAG, e.getMessage());
 				}
+
 				callRequestCallbackOnError(null);
 			}
 		} else
@@ -206,13 +214,21 @@ public class RequestHandler<T>
 		{
 			try
 			{
-				callRequestCallbackOnSuccess(mToClassType != null ? new Gson().fromJson(response.toString(), mToClassType) : null);
+				if (mToClassType != null && mToClassType.getClass().getCanonicalName().equals(JSONArray.class.getCanonicalName()))
+				{
+					callRequestCallbackOnSuccess(response);
+				}
+				else
+				{
+					callRequestCallbackOnSuccess(mToClassType != null ? new Gson().fromJson(response.toString(), mToClassType) : null);
+				}
 			} catch (Exception e)
 			{
 				if (e != null && e.getMessage() != null)
 				{
 					Log.e(TAG, e.getMessage());
 				}
+
 				callRequestCallbackOnError(null);
 			}
 		} else
@@ -225,11 +241,16 @@ public class RequestHandler<T>
 	{
 		callRequestCallbackFinished(mRequestCallbacks);
 
+		if (mToClassType != null && mToClassType.getClass().getCanonicalName().equals(VolleyError.class.getCanonicalName()))
+		{
+			callRequestCallbackOnError(error);
+		}
+		else
 		if (error != null && error.networkResponse != null && error.networkResponse.data != null)
 		{
 			try
 			{
-				callRequestCallbackOnError(mErrorClassType != null ? new Gson().fromJson(new String(error.networkResponse.data), mErrorClassType) : null);
+				callRequestCallbackOnError(mErrorClassType != null ? new Gson().fromJson(new String(error.networkResponse.data), mErrorClassType) : error);
 			} catch (Exception e)
 			{
 				if (e != null && e.getMessage() != null)
