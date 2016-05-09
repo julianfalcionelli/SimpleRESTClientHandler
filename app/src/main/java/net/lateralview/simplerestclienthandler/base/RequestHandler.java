@@ -109,7 +109,7 @@ public class RequestHandler<T>
 			}
 		} catch (Exception e)
 		{
-			if (e != null && e.getMessage() != null)
+			if (e.getMessage() != null)
 			{
 				Log.e(TAG, e.getMessage());
 			}
@@ -183,17 +183,16 @@ public class RequestHandler<T>
 		{
 			try
 			{
-				if (mToClassType != null && mToClassType.getClass().getCanonicalName().equals(JSONObject.class.getCanonicalName()))
+				if (mToClassType != null && mToClassType.toString().equals(JSONObject.class.toString()))
 				{
 					callRequestCallbackOnSuccess(response);
-				}
-				else
+				} else
 				{
 					callRequestCallbackOnSuccess(mToClassType != null ? new Gson().fromJson(response.toString(), mToClassType) : null);
 				}
 			} catch (Exception e)
 			{
-				if (e != null && e.getMessage() != null)
+				if (e.getMessage() != null)
 				{
 					Log.e(TAG, e.getMessage());
 				}
@@ -214,17 +213,16 @@ public class RequestHandler<T>
 		{
 			try
 			{
-				if (mToClassType != null && mToClassType.getClass().getCanonicalName().equals(JSONArray.class.getCanonicalName()))
+				if (mToClassType != null && mToClassType.toString().equals(JSONArray.class.toString()))
 				{
 					callRequestCallbackOnSuccess(response);
-				}
-				else
+				} else
 				{
 					callRequestCallbackOnSuccess(mToClassType != null ? new Gson().fromJson(response.toString(), mToClassType) : null);
 				}
 			} catch (Exception e)
 			{
-				if (e != null && e.getMessage() != null)
+				if (e.getMessage() != null)
 				{
 					Log.e(TAG, e.getMessage());
 				}
@@ -241,19 +239,17 @@ public class RequestHandler<T>
 	{
 		callRequestCallbackFinished(mRequestCallbacks);
 
-		if (mToClassType != null && mToClassType.getClass().getCanonicalName().equals(VolleyError.class.getCanonicalName()))
+		if (mToClassType != null && mToClassType.toString().equals(VolleyError.class.toString()))
 		{
 			callRequestCallbackOnError(error);
-		}
-		else
-		if (error != null && error.networkResponse != null && error.networkResponse.data != null)
+		} else if (error != null && error.networkResponse != null && error.networkResponse.data != null)
 		{
 			try
 			{
 				callRequestCallbackOnError(mErrorClassType != null ? new Gson().fromJson(new String(error.networkResponse.data), mErrorClassType) : error);
 			} catch (Exception e)
 			{
-				if (e != null && e.getMessage() != null)
+				if (e.getMessage() != null)
 				{
 					Log.e(TAG, e.getMessage());
 				}
