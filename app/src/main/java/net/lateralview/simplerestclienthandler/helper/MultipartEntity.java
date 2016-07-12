@@ -42,9 +42,11 @@ public class MultipartEntity
 				{
 					File file = new File(entry.getValue());
 
+					FileService fileService = new FileService(file);
+
 					if (file.exists())
 					{
-						buildPart(dos, new FileService(file).toByteArray(), entry.getKey(), file.getName());
+						buildPart(dos, fileService.toByteArray(), entry.getKey(), file.getName(), fileService.getMimeType());
 					}
 				}
 			}
@@ -70,9 +72,10 @@ public class MultipartEntity
 		return bos.toByteArray();
 	}
 
-	private void buildPart(DataOutputStream dataOutputStream, byte[] fileData, String fieldName, String fileName) throws IOException
+	private void buildPart(DataOutputStream dataOutputStream, byte[] fileData, String fieldName, String fileName, String contentType) throws IOException
 	{
 		dataOutputStream.writeBytes(TWO_HYPHENS + boundary + LINE_END);
+		dataOutputStream.writeBytes("Content-Type: " + contentType + LINE_END);
 		dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"" + fieldName + "\"; filename=\"" + fileName + "\"" + LINE_END);
 		dataOutputStream.writeBytes(LINE_END);
 
