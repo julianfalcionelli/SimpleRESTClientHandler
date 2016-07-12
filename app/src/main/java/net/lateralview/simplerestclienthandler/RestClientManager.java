@@ -20,13 +20,10 @@ import java.util.Map;
 public class RestClientManager
 {
 	public static final String TAG = RestClientManager.class.getSimpleName();
-
+	public static boolean sDebugLog = false;
+	private static RestClientManager sInstance;
 	private final RequestQueue mRequestQueue;
 	private final Context mContext;
-
-	private static RestClientManager sInstance;
-
-	public static boolean sDebugLog = false;
 
 	private RestClientManager(Context context)
 	{

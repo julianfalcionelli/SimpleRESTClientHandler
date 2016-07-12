@@ -32,7 +32,7 @@ The `enableDebugLog` method allows you too see the request information in the co
 Remember to have the Internet Permission in the manifest
 
 ```xml
-    <uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.INTERNET" />
 ```
 
 Simple Example
