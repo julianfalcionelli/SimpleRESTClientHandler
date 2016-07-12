@@ -137,13 +137,6 @@ public class BundleJSONConverter
 		});
 	}
 
-	public interface Setter
-	{
-		void setOnBundle(Bundle bundle, String key, Object value) throws JSONException;
-
-		void setOnJSON(JSONObject json, String key, Object value) throws JSONException;
-	}
-
 	public static JSONObject convertToJSON(Bundle bundle) throws JSONException
 	{
 		JSONObject json = new JSONObject();
@@ -220,5 +213,12 @@ public class BundleJSONConverter
 		}
 
 		return bundle;
+	}
+
+	public interface Setter
+	{
+		void setOnBundle(Bundle bundle, String key, Object value) throws JSONException;
+
+		void setOnJSON(JSONObject json, String key, Object value) throws JSONException;
 	}
 }
