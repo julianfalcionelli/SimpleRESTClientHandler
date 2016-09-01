@@ -7,14 +7,10 @@ Using GSON as dependency SimpleRESTClientHandler parse the responses automatical
 
 Setup
 -----
-### Add SimpleRESTClientHandler as a Module
-Download the project and include in your project as a module.
-
-Make sure that the `build.gradle` of your application has the module depency
 
 ```groovy
 dependencies {
-    compile project(":simplerestclienthandler")
+    compile 'julianfalcionelli:SimpleRESTClientHandler:1.0'
 }
 ```
 
