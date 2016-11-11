@@ -10,11 +10,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class FileService
+public class FileManager
 {
 	public File file;
 
-	public FileService(File file)
+	public FileManager(File file)
 	{
 		this.file = file;
 	}

@@ -10,11 +10,11 @@ import com.google.gson.GsonBuilder;
 
 import net.lateralview.simplerestclienthandler.gson.AnnotationExclusionStrategy;
 import net.lateralview.simplerestclienthandler.helper.BundleJSONConverter;
+import net.lateralview.simplerestclienthandler.helper.ReflectionHelper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
 
@@ -153,26 +153,26 @@ public class RequestHandler<T>
 
 	private Type getToClassFromRequestCallback()
 	{
-		Type genericType = null;
-
-		if (mRequestCallbacks != null)
+		if (mRequestCallbacks != null && mRequestCallbacks instanceof ICallbackTypes)
 		{
-			genericType = ((ParameterizedType) mRequestCallbacks.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+			return ((ICallbackTypes) mRequestCallbacks).getResponseType();
 		}
-
-		return genericType;
+		else
+		{
+			return ReflectionHelper.getTypeArgument(mRequestCallbacks, 0);
+		}
 	}
 
 	private Type getErrorClassFromRequestCallback()
 	{
-		Type genericType = null;
-
-		if (mRequestCallbacks != null)
+		if (mRequestCallbacks != null && mRequestCallbacks instanceof ICallbackTypes)
 		{
-			genericType = ((ParameterizedType) mRequestCallbacks.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
+			return ((ICallbackTypes) mRequestCallbacks).getErrorType();
 		}
-
-		return genericType;
+		else
+		{
+			return ReflectionHelper.getTypeArgument(mRequestCallbacks, 1);
+		}
 	}
 
 	private void requestJSONObjectResponseHandler(JSONObject response)

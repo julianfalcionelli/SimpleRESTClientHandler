@@ -97,7 +97,7 @@ public class RestClientManager
 	}
 
 	/*
-		For request what returns JSONObject
+		For request that return JSONObject
 	 */
 	public void makeJsonRequest(int method, String url, RequestHandler requestHandler)
 	{
@@ -122,7 +122,7 @@ public class RestClientManager
 	}
 
 	/*
-		For request what returns JSONArray
+		For request that return JSONArray
 	 */
 	public void makeJsonArrayRequest(int method, String url, RequestHandler requestHandler)
 	{
@@ -147,7 +147,7 @@ public class RestClientManager
 	}
 
 	/*
-		For multipart request what returns JSONObject
+		For multipart request that return JSONObject
 	 */
 	public void makeMultipartJsonRequest(int method, String url, RequestHandler requestHandler)
 	{
@@ -172,7 +172,7 @@ public class RestClientManager
 	}
 
 	/*
-		For multipart request what returns JSONArray
+		For multipart request that return JSONArray
 	 */
 	public void makeMultipartJsonArrayRequest(int method, String url, RequestHandler requestHandler)
 	{

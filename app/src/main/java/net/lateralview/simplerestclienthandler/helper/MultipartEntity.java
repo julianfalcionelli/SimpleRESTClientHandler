@@ -42,11 +42,11 @@ public class MultipartEntity
 				{
 					File file = new File(entry.getValue());
 
-					FileService fileService = new FileService(file);
+					FileManager fileManager = new FileManager(file);
 
 					if (file.exists())
 					{
-						buildPart(dos, fileService.toByteArray(), entry.getKey(), file.getName(), fileService.getMimeType());
+						buildPart(dos, fileManager.toByteArray(), entry.getKey(), file.getName(), fileManager.getMimeType());
 					}
 				}
 			}

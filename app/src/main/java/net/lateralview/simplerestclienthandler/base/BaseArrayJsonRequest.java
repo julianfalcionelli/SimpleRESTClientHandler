@@ -8,7 +8,7 @@ import com.android.volley.ParseError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonRequest;
 
 import net.lateralview.simplerestclienthandler.RestClientManager;
 import net.lateralview.simplerestclienthandler.log.RequestLoggingHelper;
@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public abstract class BaseArrayJsonRequest extends JsonArrayRequest
+public abstract class BaseArrayJsonRequest extends JsonRequest<JSONArray>
 {
 	protected static String TAG = BaseArrayJsonRequest.class.getSimpleName();
 
@@ -37,7 +37,7 @@ public abstract class BaseArrayJsonRequest extends JsonArrayRequest
 	 */
 	protected BaseArrayJsonRequest(int method, String url, JSONObject parameters, Response.Listener<JSONArray> listener, Response.ErrorListener errorListener)
 	{
-		super(method, url, parameters, listener, errorListener);
+		super(method, url, parameters != null ? parameters.toString() : null, listener, errorListener);
 		if (RestClientManager.sDebugLog)
 		{
 			Log.i(TAG, RequestLoggingHelper.getRequestText(this));
