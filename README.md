@@ -10,7 +10,7 @@ Setup
 
 ```groovy
 dependencies {
-    compile 'julianfalcionelli:SimpleRESTClientHandler:1.0'
+    compile 'julianfalcionelli:SimpleRESTClientHandler:1.1'
 }
 ```
 
