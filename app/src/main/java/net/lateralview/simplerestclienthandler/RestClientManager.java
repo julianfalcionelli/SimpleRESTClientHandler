@@ -12,6 +12,7 @@ import net.lateralview.simplerestclienthandler.base.BaseArrayJsonRequest;
 import net.lateralview.simplerestclienthandler.base.BaseJsonRequest;
 import net.lateralview.simplerestclienthandler.base.BaseMultipartJsonArrayRequest;
 import net.lateralview.simplerestclienthandler.base.BaseMultipartJsonRequest;
+import net.lateralview.simplerestclienthandler.base.RequestFutureHandler;
 import net.lateralview.simplerestclienthandler.base.RequestHandler;
 import net.lateralview.simplerestclienthandler.helper.VolleyHelper;
 
@@ -69,12 +70,19 @@ public class RestClientManager
 		return sInstance;
 	}
 
-	public void enableDebugLog(boolean enable)
+	public RestClientManager enableDebugLog(boolean enable)
 	{
 		sDebugLog = enable;
+
+		return getInstance();
 	}
 
 	private <T> void addToRequestQueue(Request<T> req, String tag)
+	{
+		mRequestQueue.add(normalizeRequest(req, tag));
+	}
+
+	private Request normalizeRequest(Request req, String tag)
 	{
 		//to avoid time out
 		req.setRetryPolicy(new DefaultRetryPolicy(
@@ -83,7 +91,8 @@ public class RestClientManager
 				DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
 		req.setTag(tag != null ? tag : TAG);
-		mRequestQueue.add(req);
+
+		return req;
 	}
 
 	public void cancelPendingRequests(Object tag)
@@ -116,9 +125,7 @@ public class RestClientManager
 
 	public void makeJsonRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers, String tag)
 	{
-		addToRequestQueue(new BaseJsonRequest(method, url, requestHandler, headers)
-		{
-		}, tag);
+		addToRequestQueue(new BaseJsonRequest(method, url, requestHandler.getParameters(), requestHandler.getResponseSuccessListener(), requestHandler.getResponseErrorListener(), headers), tag);
 	}
 
 	/*
@@ -141,9 +148,7 @@ public class RestClientManager
 
 	public void makeJsonArrayRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers, String tag)
 	{
-		addToRequestQueue(new BaseArrayJsonRequest(method, url, requestHandler, headers)
-		{
-		}, tag);
+		addToRequestQueue(new BaseArrayJsonRequest(method, url, requestHandler.getParameters(), requestHandler.getArrayResponseSuccessListener(), requestHandler.getResponseErrorListener(), headers), tag);
 	}
 
 	/*
@@ -166,9 +171,7 @@ public class RestClientManager
 
 	public void makeMultipartJsonRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers, String tag)
 	{
-		addToRequestQueue(new BaseMultipartJsonRequest(method, url, requestHandler, headers)
-		{
-		}, tag);
+		addToRequestQueue(new BaseMultipartJsonRequest(method, url, requestHandler.getParameters(), requestHandler.getFileParameters(), requestHandler.getResponseSuccessListener(), requestHandler.getResponseErrorListener(), headers), tag);
 	}
 
 	/*
@@ -191,8 +194,105 @@ public class RestClientManager
 
 	public void makeMultipartJsonArrayRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers, String tag)
 	{
-		addToRequestQueue(new BaseMultipartJsonArrayRequest(method, url, requestHandler, headers)
-		{
-		}, tag);
+		addToRequestQueue(new BaseMultipartJsonArrayRequest(method, url, requestHandler.getParameters(), requestHandler.getFileParameters(), requestHandler.getArrayResponseSuccessListener(), requestHandler.getResponseErrorListener(), headers), tag);
+	}
+
+
+	//------- Future Request ------//
+
+	/*
+		For request that return JSONObject
+	 */
+	public Object makeJsonRequest(int method, String url, RequestFutureHandler requestHandler)
+	{
+		return makeJsonRequest(method, url, requestHandler, null, null);
+	}
+
+	public Object makeJsonRequest(int method, String url, RequestFutureHandler requestHandler, String tag)
+	{
+		return makeJsonRequest(method, url, requestHandler, null, tag);
+	}
+
+	public Object makeJsonRequest(int method, String url, RequestFutureHandler requestHandler, Map<String, String> headers)
+	{
+		return makeJsonRequest(method, url, requestHandler, headers, null);
+	}
+
+	public Object makeJsonRequest(int method, String url, RequestFutureHandler requestHandler, Map<String, String> headers, String tag)
+	{
+		addToRequestQueue(new BaseJsonRequest(method, url, requestHandler.getParameters(), requestHandler.getRequestFuture(), requestHandler.getRequestFuture(), headers), tag);
+		return requestHandler.call();
+	}
+
+	/*
+		For request that return JSONArray
+	 */
+	public Object makeJsonArrayRequest(int method, String url, RequestFutureHandler requestHandler)
+	{
+		return makeJsonArrayRequest(method, url, requestHandler, null, null);
+	}
+
+	public Object makeJsonArrayRequest(int method, String url, RequestFutureHandler requestHandler, String tag)
+	{
+		return makeJsonArrayRequest(method, url, requestHandler, null, tag);
+	}
+
+	public Object makeJsonArrayRequest(int method, String url, RequestFutureHandler requestHandler, Map<String, String> headers)
+	{
+		return makeJsonArrayRequest(method, url, requestHandler, headers, null);
+	}
+
+	public Object makeJsonArrayRequest(int method, String url, RequestFutureHandler requestHandler, Map<String, String> headers, String tag)
+	{
+		addToRequestQueue(new BaseArrayJsonRequest(method, url, requestHandler.getParameters(), requestHandler.getRequestFuture(), requestHandler.getRequestFuture(), headers), tag);
+		return requestHandler.call();
+	}
+
+	/*
+		For multipart request that return JSONObject
+	 */
+	public Object makeMultipartJsonRequest(int method, String url, RequestFutureHandler requestHandler)
+	{
+		return makeMultipartJsonRequest(method, url, requestHandler, null, null);
+	}
+
+	public Object makeMultipartJsonRequest(int method, String url, RequestFutureHandler requestHandler, String tag)
+	{
+		return makeMultipartJsonRequest(method, url, requestHandler, null, tag);
+	}
+
+	public Object makeMultipartJsonRequest(int method, String url, RequestFutureHandler requestHandler, Map<String, String> headers)
+	{
+		return makeMultipartJsonRequest(method, url, requestHandler, headers, null);
+	}
+
+	public Object makeMultipartJsonRequest(int method, String url, RequestFutureHandler requestHandler, Map<String, String> headers, String tag)
+	{
+		addToRequestQueue(new BaseMultipartJsonRequest(method, url, requestHandler.getParameters(), requestHandler.getFileParameters(), requestHandler.getRequestFuture(), requestHandler.getRequestFuture(), headers), tag);
+		return requestHandler.call();
+	}
+
+	/*
+		For multipart request that return JSONArray
+	 */
+	public Object makeMultipartJsonArrayRequest(int method, String url, RequestFutureHandler requestHandler)
+	{
+		return makeMultipartJsonArrayRequest(method, url, requestHandler, null, null);
+	}
+
+	public Object makeMultipartJsonArrayRequest(int method, String url, RequestFutureHandler requestHandler, String tag)
+	{
+		return makeMultipartJsonArrayRequest(method, url, requestHandler, null, tag);
+	}
+
+	public Object makeMultipartJsonArrayRequest(int method, String url, RequestFutureHandler requestHandler, Map<String, String> headers)
+	{
+		return makeMultipartJsonArrayRequest(method, url, requestHandler, headers, null);
+	}
+
+	public Object makeMultipartJsonArrayRequest(int method, String url, RequestFutureHandler requestHandler, Map<String, String> headers, String tag)
+	{
+		addToRequestQueue(new BaseMultipartJsonArrayRequest(method, url, requestHandler.getParameters(), requestHandler.getFileParameters(), requestHandler.getRequestFuture(), requestHandler.getRequestFuture(), headers), tag);
+		return requestHandler.call();
 	}
 }

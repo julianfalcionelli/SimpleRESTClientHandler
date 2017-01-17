@@ -19,11 +19,6 @@ public class BaseMultipartJsonArrayRequest extends MultipartRequest<JSONArray>
 		super(method, url, parameters, fileParameters, headers, listener, errorListener);
 	}
 
-	protected BaseMultipartJsonArrayRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers)
-	{
-		this(method, url, requestHandler.getParameters(), requestHandler.getFileParameters(), requestHandler.getArrayResponseSuccessListener(), requestHandler.getResponseErrorListener(), headers);
-	}
-
 	@Override
 	protected Response<JSONArray> parseNetworkResponse(NetworkResponse response)
 	{

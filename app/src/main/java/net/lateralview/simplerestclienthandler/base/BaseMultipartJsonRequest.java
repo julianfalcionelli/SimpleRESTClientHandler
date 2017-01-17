@@ -13,14 +13,9 @@ import java.util.Map;
 
 public class BaseMultipartJsonRequest extends MultipartRequest<JSONObject>
 {
-	protected BaseMultipartJsonRequest(int method, String url, JSONObject parameters, Map<String, String> fileParameters, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, Map<String, String> headers)
+	public BaseMultipartJsonRequest(int method, String url, JSONObject parameters, Map<String, String> fileParameters, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, Map<String, String> headers)
 	{
 		super(method, url, parameters, fileParameters, headers, listener, errorListener);
-	}
-
-	protected BaseMultipartJsonRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers)
-	{
-		this(method, url, requestHandler.getParameters(), requestHandler.getFileParameters(), requestHandler.getResponseSuccessListener(), requestHandler.getResponseErrorListener(), headers);
 	}
 
 	@Override

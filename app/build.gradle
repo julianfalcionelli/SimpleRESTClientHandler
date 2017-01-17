@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 
-def RELEASE_VERSION = "1.1"
+def RELEASE_VERSION = "1.2"
 
 android {
     compileSdkVersion 23

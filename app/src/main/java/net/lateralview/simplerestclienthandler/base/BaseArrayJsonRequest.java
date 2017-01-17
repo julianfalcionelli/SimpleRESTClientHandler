@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public abstract class BaseArrayJsonRequest extends JsonRequest<JSONArray>
+public class BaseArrayJsonRequest extends JsonRequest<JSONArray>
 {
 	protected static String TAG = BaseArrayJsonRequest.class.getSimpleName();
 
@@ -35,22 +35,18 @@ public abstract class BaseArrayJsonRequest extends JsonRequest<JSONArray>
 	 * @param listener      Listener to handle request successful response
 	 * @param errorListener Listener to handle request error response
 	 */
-	protected BaseArrayJsonRequest(int method, String url, JSONObject parameters, Response.Listener<JSONArray> listener, Response.ErrorListener errorListener)
+	public BaseArrayJsonRequest(int method, String url, JSONObject parameters, Response.Listener<JSONArray> listener, Response.ErrorListener errorListener, Map<String, String> headers)
 	{
 		super(method, url, parameters != null ? parameters.toString() : null, listener, errorListener);
-		if (RestClientManager.sDebugLog)
-		{
-			Log.i(TAG, RequestLoggingHelper.getRequestText(this));
-		}
-	}
-
-	protected BaseArrayJsonRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers)
-	{
-		this(method, url, requestHandler.getParameters(), requestHandler.getArrayResponseSuccessListener(), requestHandler.getResponseErrorListener());
 
 		if (headers != null)
 		{
 			mHeaders.putAll(headers);
+		}
+
+		if (RestClientManager.sDebugLog)
+		{
+			Log.i(TAG, RequestLoggingHelper.getRequestText(this));
 		}
 	}
 

@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public abstract class BaseJsonRequest extends JsonObjectRequest
+public class BaseJsonRequest extends JsonObjectRequest
 {
 	protected static String TAG = BaseJsonRequest.class.getSimpleName();
 
@@ -34,22 +34,18 @@ public abstract class BaseJsonRequest extends JsonObjectRequest
 	 * @param listener      Listener to handle request successful response
 	 * @param errorListener Listener to handle request error response
 	 */
-	protected BaseJsonRequest(int method, String url, JSONObject parameters, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener)
+	public BaseJsonRequest(int method, String url, JSONObject parameters, Response.Listener<JSONObject> listener, Response.ErrorListener errorListener, Map<String, String> headers)
 	{
 		super(method, url, parameters, listener, errorListener);
-		if (RestClientManager.sDebugLog)
-		{
-			Log.i(TAG, RequestLoggingHelper.getRequestText(this));
-		}
-	}
-
-	protected BaseJsonRequest(int method, String url, RequestHandler requestHandler, Map<String, String> headers)
-	{
-		this(method, url, requestHandler.getParameters(), requestHandler.getResponseSuccessListener(), requestHandler.getResponseErrorListener());
 
 		if (headers != null)
 		{
 			mHeaders.putAll(headers);
+		}
+
+		if (RestClientManager.sDebugLog)
+		{
+			Log.i(TAG, RequestLoggingHelper.getRequestText(this));
 		}
 	}
 

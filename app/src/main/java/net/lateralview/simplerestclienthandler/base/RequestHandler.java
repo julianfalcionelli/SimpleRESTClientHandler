@@ -1,6 +1,7 @@
 package net.lateralview.simplerestclienthandler.base;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.android.volley.Response;
@@ -35,7 +36,7 @@ public class RequestHandler<T>
 		initializeRequestHandler(requestCallbacks);
 	}
 
-	public RequestHandler(RequestCallbacks requestCallbacks, Bundle parameters)
+	public RequestHandler(RequestCallbacks requestCallbacks, @NonNull Bundle parameters)
 	{
 		mBundleParameters = parameters;
 
@@ -102,10 +103,7 @@ public class RequestHandler<T>
 				jsonObject = new JSONObject(new GsonBuilder().setExclusionStrategies(new AnnotationExclusionStrategy()).create().toJson(mObjectParameter));
 			} else
 			{
-				if (mBundleParameters != null)
-				{
-					jsonObject = BundleJSONConverter.convertToJSON(mBundleParameters);
-				}
+				jsonObject = BundleJSONConverter.convertToJSON(mBundleParameters);
 			}
 		} catch (Exception e)
 		{
