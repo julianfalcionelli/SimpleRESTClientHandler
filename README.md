@@ -143,6 +143,10 @@ News
 - Now Support Multipart Requests! 
 - Gson extension to exclude parameters in the serialization process (`@Exclude`)
 
+WIP
+-----
+- Support to reactive programming via Future Request
+
 License
 -----
     Copyright 2016 Julián Falcionelli
