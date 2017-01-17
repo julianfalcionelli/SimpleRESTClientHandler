@@ -10,7 +10,7 @@ Setup
 
 ```groovy
 dependencies {
-    compile 'julianfalcionelli:SimpleRESTClientHandler:1.1'
+    compile 'julianfalcionelli:SimpleRESTClientHandler:1.2'
 }
 ```
 
@@ -140,12 +140,9 @@ RestClientManager.getInstance().makeMultipartJsonArrayRequest(Request.Method.GET
 
 News
 -----
+- Reactive programming via Future Request
 - Now Support Multipart Requests! 
 - Gson extension to exclude parameters in the serialization process (`@Exclude`)
-
-WIP
------
-- Support to reactive programming via Future Request
 
 License
 -----
