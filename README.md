@@ -140,7 +140,7 @@ RestClientManager.getInstance().makeMultipartJsonArrayRequest(Request.Method.GET
 
 News
 -----
-- Reactive programming via Future Request
+- Synchronous Calls via Future Request 
 - Now Support Multipart Requests! 
 - Gson extension to exclude parameters in the serialization process (`@Exclude`)
 
