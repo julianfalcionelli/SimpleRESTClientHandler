@@ -43,17 +43,17 @@ We also recommend spending a tag request to cancel the specific request for some
 
 ```java
 RestClientManager.getInstance().makeJsonRequest(Request.Method.POST, url, 
-new RequestHandler<>(new RequestCallbacks<ResponseModel, ErrorModel>() {
-	@Override
-	public void onRequestSuccess(ResponseModel response) {
+	new RequestHandler<>(new RequestCallbacks<ResponseModel, ErrorModel>() {
+		@Override
+		public void onRequestSuccess(ResponseModel response) {
 
-	}
+		}
 
-	@Override
-	public void onRequestError(ErrorModel error) {
+		@Override
+		public void onRequestError(ErrorModel error) {
 
-	}
-}, parameters));
+		}
+	}, parameters));
 ```
 
 To create an instance of `Request Handler` you need to spend a instance of `Request Callbacks`. This class has two types, the model answer at the first set and the second type defines the model error. If you do not want to analyze the response or error just pass a `Object` in each of the types.
@@ -74,17 +74,17 @@ To make a request that returns a JSON Array you need to call the `makeJsonArrayR
 
 ```java
 RestClientManager.getInstance().makeJsonArrayRequest(Request.Method.GET, url, 
-new RequestHandler<>(new RequestCallbacks<List<ResponseItemModel>, ErrorModel>() {
-	@Override
-	public void onRequestSuccess(List<ResponseItemModel> response) {
+	new RequestHandler<>(new RequestCallbacks<List<ResponseItemModel>, ErrorModel>() {
+		@Override
+		public void onRequestSuccess(List<ResponseItemModel> response) {
 
-	}
+		}
 
-	@Override
-	public void onRequestError(ErrorModel error) {
+		@Override
+		public void onRequestError(ErrorModel error) {
 
-	}
-}, parameters));
+		}
+	}, parameters));
 ```
 
 ### Multipart Request
@@ -96,34 +96,34 @@ To pass files to the RequestHandler call the `setFileParameters` method passing 
 
 ```java
 RestClientManager.getInstance().makeMultipartJsonRequest(Request.Method.POST, url, 
-new RequestHandler<>(new RequestCallbacks<ResponseModel, ErrorModel>() {
-	@Override
-	public void onRequestSuccess(ResponseModel response) {
+	new RequestHandler<>(new RequestCallbacks<ResponseModel, ErrorModel>() {
+		@Override
+		public void onRequestSuccess(ResponseModel response) {
 
-	}
+		}
 
-	@Override
-	public void onRequestError(ErrorModel error) {
+		@Override
+		public void onRequestError(ErrorModel error) {
 
-	}
-}, parameters).setFileParameters(filesMap));
+		}
+	}, parameters).setFileParameters(filesMap));
 ```
 
  - makeMultipartJsonArrayRequest
  
 ```java
 RestClientManager.getInstance().makeMultipartJsonArrayRequest(Request.Method.GET, url, 
-new RequestHandler<>(new RequestCallbacks<List<ResponseItemModel>, ErrorModel>() {
-	@Override
-	public void onRequestSuccess(List<ResponseItemModel> response) {
+	new RequestHandler<>(new RequestCallbacks<List<ResponseItemModel>, ErrorModel>() {
+		@Override
+		public void onRequestSuccess(List<ResponseItemModel> response) {
 
-	}
+		}
 
-	@Override
-	public void onRequestError(ErrorModel error) {
+		@Override
+		public void onRequestError(ErrorModel error) {
 
-	}
-}, parameters).setFileParameters(filesMap));
+		}
+	}, parameters).setFileParameters(filesMap));
 ```
 
 News
